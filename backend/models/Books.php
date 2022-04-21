@@ -43,12 +43,22 @@ class Books extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            //'id' => 'ID',
             'title' => 'Title',
             'isbn' => 'Isbn',
             'year' => 'Year',
-            'author_id' => 'Author ID',
-            'publisher_id' => 'Publisher ID',
+            'authors.name' => 'Author',
+            'publishers.name' => 'Publisher',
         ];
     }
+    public function getAuthors()
+    {
+        return $this->hasOne(Authors::class, ['id' => 'author_id']);
+    }
+    public function getPublishers()
+    {
+        return $this->hasOne(Publishers::class, ['id' => 'publisher_id']);
+    }
+
+
 }
